@@ -24,31 +24,32 @@ export default function MovieListPage(){
 
     return(
         <>
-        <h2 className="">Veja o catálogo completo dos filmes</h2>
+        <div className="flex flex-col items-center">
+            <h2 className="mt-8 mb-5 font-bold text-2xl">Veja o catálogo completo dos filmes</h2>
 
-        <input 
-        className="text-black"
-        type="text" 
-        name="search"
-        id="search"
-        placeholder="O que procura caro amigo?"
-        value={search}
-        onChange={handleSearch}
-        />
+            <input 
+            className="text-black w-72 p-2 rounded-xl mb-10"
+            type="text" 
+            name="search"
+            id="search"
+            placeholder="O que procura caro amigo?"
+            value={search}
+            onChange={handleSearch}
+            />
+        </div>
+            <div className="flex flex-wrap justify-center">
+                {
+                    filmesFiltrados.length > 0 ?
 
-        
-            {
-                filmesFiltrados.length > 0 ?
+                        filmesFiltrados
+                            .map(filme => (
+                                <MovieCard key={filme.id}{...filme}/>
+                        ))
 
-                    filmesFiltrados
-                        .map(filme => (
-                            <MovieCard key={filme.id}{...filme}/>
-                    ))
-
-                :
-                <p>Filme não encontrado</p>
-            }
-       
+                    :
+                    <p>Filme não encontrado</p>
+                }
+            </div>
         </>
     )
 
