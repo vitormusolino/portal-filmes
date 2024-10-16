@@ -27,7 +27,7 @@ export default function Home(){
                     ))}
                 </CardContainer>
 
-                <CardContainer titulo="Melhores Filmes">
+                <CardContainer titulo="Filmes Populares">
                     {filmes
                     .filter(filmes => filmes.popularity >= 1300)
                     .map(filmes=>(

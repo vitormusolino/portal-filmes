@@ -4,4 +4,10 @@
 
 .active{
   border-bottom: 2px solid black;
+  border-radius: 3px;
+}
+
+.barra-rolagem{
+  scrollbar-width: 80%;
+  background: transparent;
 }
