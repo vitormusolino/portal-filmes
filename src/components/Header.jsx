@@ -12,9 +12,9 @@ export default function Header(){
 
     return(
         <>
-            <header className="flex w-full h-20 bg-purple-800 justify-around text-white items-center text-xl">
+            <header className="flex w-full h-20 bg-purple-800 justify-around text-white items-center text-xl font-bold">
                 <div>
-                    <h1>Portal Filmes</h1>
+                    <h1>CineApp</h1>
                 </div>
                 <nav>
                     <ul className="flex gap-4">
