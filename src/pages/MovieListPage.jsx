@@ -28,7 +28,7 @@ export default function MovieListPage(){
             <h2 className="mt-8 mb-5 font-bold text-2xl">Veja o catálogo completo dos filmes</h2>
 
             <input 
-            className="text-black w-72 p-2 rounded-xl mb-10"
+            className="text-black w-72 p-2 rounded-xl mb-10 w-80"
             type="text" 
             name="search"
             id="search"
@@ -37,7 +37,7 @@ export default function MovieListPage(){
             onChange={handleSearch}
             />
         </div>
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center p-5">
                 {
                     filmesFiltrados.length > 0 ?
 
