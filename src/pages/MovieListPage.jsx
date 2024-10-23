@@ -33,7 +33,7 @@ export default function MovieListPage(){
             <h2 className="mt-8 mb-5 font-bold text-2xl">Veja o catálogo completo dos filmes</h2>
 
             <input 
-            className="text-black w-72 p-2 rounded-xl mb-10 w-80"
+            className="text-black p-2 rounded-xl mb-10 w-80"
             type="text" 
             name="search"
             id="search"

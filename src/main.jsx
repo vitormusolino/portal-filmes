@@ -22,7 +22,7 @@ import PageNotFound from './pages/PageNotFound.jsx'
       children: [
         {index: true, element: <Home />},
         {path: 'movies', element: <MovieListPage />},
-        {path: 'movies/:id', element: <MovieDetailPage />},
+        {path: '/movies/:id', element: <MovieDetailPage />},
         {path: 'genre', element: <GenreListPage />},
         {path: 'genre/:id', element: <MovieByGenrePage />},
         {path: '*', element: <PageNotFound />}
