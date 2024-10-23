@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import MovieCard from "../components/MovieCard"
+import 'ldrs/ring'
+import { jellyTriangle } from 'ldrs'
+jellyTriangle.register()
 
 export default function MovieListPage(){
 
     const [search, setSearch] = useState('')
     const [filmes,setFilmes] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
     
 
     useEffect( () => {
+        setIsLoading(true)
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br')
         .then( results => results.json())
         .then( data => setFilmes(data.results))
         .catch(erro => console.log(erro))
-        .finally(() => console.log("Cabo"))
+        .finally(() => setIsLoading(false))
     },[])
     
 
@@ -39,6 +44,8 @@ export default function MovieListPage(){
         </div>
             <div className="flex flex-wrap justify-center p-5">
                 {
+                    isLoading ?
+                    <l-jelly-triangle size="30" speed="1.75" color="white" ></l-jelly-triangle>:
                     filmesFiltrados.length > 0 ?
 
                         filmesFiltrados
