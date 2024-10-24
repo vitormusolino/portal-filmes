@@ -24,7 +24,7 @@ import PageNotFound from './pages/PageNotFound.jsx'
         {path: 'movies', element: <MovieListPage />},
         {path: '/movies/:id', element: <MovieDetailPage />},
         {path: 'genre', element: <GenreListPage />},
-        {path: 'genre/:id', element: <MovieByGenrePage />},
+        {path: '/genre/:id', element: <MovieByGenrePage />},
         {path: '*', element: <PageNotFound />}
       ]
     }

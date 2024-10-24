@@ -29,7 +29,7 @@ export default function MovieDetailPage() {
   return (
     <>
       <div
-        className="relative flex flex-col h-[75vh] bg-no-repeat bg-cover bg-center items-center p-20"
+        className="relative flex flex-col h-[85vh] bg-no-repeat bg-cover bg-center items-center p-20"
         style={{
           backgroundImage: `url('https://image.tmdb.org/t/p/w1280${movie.backdrop_path}')`,
         }}

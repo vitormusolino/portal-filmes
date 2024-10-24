@@ -1,10 +1,29 @@
-export default function GenreListPage(){
-    return(
-        <>
-        <h1>Genre Page</h1>
-          {/*Lista todos os gêneros disponíveis em um formato de card,
-        cada um com uma cor de fundo diferente, com um link 
-        para uma página que exibe filmes pertencentes a esse gênero. */}
-        </>
+import { useEffect, useState } from 'react';
+import GenreCard from '../components/GenreCard'; 
+
+export default function GenreListPage() {
+  const [genres, setGenres] = useState([]); // Inicialize como um array
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br`
     )
+      .then((response) => response.json())
+      .then((data) => {
+        setGenres(data.genres); // Acesse a propriedade 'genres'
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  return (
+    <>
+      <h1 className='font-bold text-2xl text-center mt-20'>Escolha o seu gênero preferido!</h1>
+
+      <div className='flex flex-wrap justify-around items-center my-40 px-20 gap-12'>
+        {genres.map((genre) => ( // Altere 'genre' para 'genres' aqui
+          <GenreCard key={genre.id} name={genre.name} /> // Passe 'name' como prop
+        ))}
+      </div>
+    </>
+  );
 }
