@@ -13,6 +13,8 @@ import MovieDetailPage from './pages/MovieDetailPage.jsx'
 import GenreListPage from './pages/GenreListPage.jsx'
 import MovieByGenrePage from './pages/MoviesByGenrePage.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
+import Favoritos from './pages/Favoritos.jsx'
+
 
 
   const router = createBrowserRouter([
@@ -21,10 +23,11 @@ import PageNotFound from './pages/PageNotFound.jsx'
       element: <App/>,
       children: [
         {index: true, element: <Home />},
-        {path: 'movies', element: <MovieListPage />},
+        {path: '/movies', element: <MovieListPage />},
         {path: '/movies/:id', element: <MovieDetailPage />},
-        {path: 'genre', element: <GenreListPage />},
+        {path: '/genre', element: <GenreListPage />},
         {path: '/genre/:id', element: <MovieByGenrePage />},
+        {path: '/favoritos', element: <Favoritos/>},
         {path: '*', element: <PageNotFound />}
       ]
     }

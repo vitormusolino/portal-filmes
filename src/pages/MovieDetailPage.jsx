@@ -5,6 +5,24 @@ export default function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [video, setVideo] = useState({});
+  const filme = {
+    id: movie.id, title: movie.title, poster_path: movie.poster_path }
+
+  const handleFavorito = ({id,title,poster_path}) => {
+
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
+
+    const isFavorite = favoritos.some(filme => filme.id == id)
+
+    if(isFavorite){
+      favoritos = favoritos.filter(filme => filme.id != id)
+    }else{
+      favoritos.push({id,title,poster_path})
+    }
+
+    localStorage.setItem('favoritos', JSON.stringify(favoritos))
+}
+
 
   useEffect(() => {
     fetch(
@@ -25,6 +43,8 @@ export default function MovieDetailPage() {
       })
       .catch((err) => console.error(err));
   }, []);
+
+    
 
   return (
     <>
@@ -65,6 +85,7 @@ export default function MovieDetailPage() {
             <div className="flex items-center gap-10 mt-7">
               <p className="">⭐{movie.vote_average}</p>
               <p>{movie.release_date}</p>
+              <button onClick={() => handleFavorito(filme)}>Adicionar Favoritos</button>
             </div>
           </div>
         </div>
