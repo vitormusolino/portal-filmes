@@ -21,7 +21,7 @@ export default function Header(){
                         <li><NavLink to='/'>Home</NavLink></li>
                         <li><NavLink to='/movies'>Filmes</NavLink></li>
                         <li><NavLink to='/genre'>Gêneros</NavLink></li>
-                        {isLogged && <li><NavLink to='/favoritos'>Favoritos</NavLink></li>}
+                        {isLogged && <li><NavLink to='/favoritos'>Sua lista</NavLink></li>}
                     </ul>
                 </nav>
                 <Login isLogged={isLogged} handleLogin={handleLogin}/>

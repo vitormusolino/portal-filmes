@@ -5,24 +5,40 @@ export default function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
   const [video, setVideo] = useState({});
+  const [elenco, setElenco] = useState([]);
   const filme = {
-    id: movie.id, title: movie.title, poster_path: movie.poster_path }
+    id: movie.id,
+    title: movie.title,
+    poster_path: movie.poster_path,
+  };
 
-  const handleFavorito = ({id,title,poster_path}) => {
+  const handleFavorito = ({ id, title, poster_path }) => {
+    let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
-    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
+    const isFavorite = favoritos.some((filme) => filme.id == id);
 
-    const isFavorite = favoritos.some(filme => filme.id == id)
-
-    if(isFavorite){
-      favoritos = favoritos.filter(filme => filme.id != id)
-    }else{
-      favoritos.push({id,title,poster_path})
+    if (isFavorite) {
+      favoritos = favoritos.filter((filme) => filme.id != id);
+    } else {
+      favoritos.push({ id, title, poster_path });
     }
 
-    localStorage.setItem('favoritos', JSON.stringify(favoritos))
-}
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  };
 
+  const handleAssistidos = ({ id, title, poster_path }) => {
+    let assistidos = JSON.parse(localStorage.getItem("assistidos")) || [];
+
+    const isWatched = assistidos.some((filme) => filme.is == id);
+
+    if (isWatched) {
+      assistidos = assistidos.filter((filme) => filme.id != id);
+    } else {
+      assistidos.push({ id, title, poster_path });
+    }
+
+    localStorage.setItem("assistidos", JSON.stringify(assistidos));
+  };
 
   useEffect(() => {
     fetch(
@@ -42,9 +58,17 @@ export default function MovieDetailPage() {
         setVideo(data);
       })
       .catch((err) => console.error(err));
-  }, []);
 
-    
+    fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-br
+        `
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setElenco(data.cast);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <>
@@ -66,7 +90,7 @@ export default function MovieDetailPage() {
           </div>
           <div className="text-white max-w-lg">
             <h1 className="text-4xl font-bold mb-5">{movie.title}</h1>
-            <div className="flex py-5 gap-10">
+            <div className="flex pt-3 pb-5 gap-10">
               {movie.genres && movie.genres.length > 0 ? (
                 movie.genres.map((genre) => (
                   <h2
@@ -83,9 +107,24 @@ export default function MovieDetailPage() {
 
             <p className="font-bold text-sm">{movie.overview}</p>
             <div className="flex items-center gap-10 mt-7">
-              <p className="">⭐{movie.vote_average}</p>
-              <p>{movie.release_date}</p>
-              <button onClick={() => handleFavorito(filme)}>Adicionar Favoritos</button>
+              <p className="">⭐ {movie.vote_average}</p>
+              <p>📅  {movie.release_date}</p>
+            </div>
+            <div className="flex pt-5 pb-8 gap-10">
+              <button
+                onClick={() => handleFavorito(filme)}
+                className="border-2 border-gray-100 p-3 rounded bg-purple-800
+              hover:bg-transparent hover:border-purple-800 duration-500"
+              >
+                Favoritos
+              </button>
+              <button
+                onClick={() => handleAssistidos(filme)}
+                className="border-2 border-gray-100 p-3 rounded bg-purple-800
+              hover:bg-transparent hover:border-purple-800 duration-500"
+              >
+                Assistidos
+              </button>
             </div>
           </div>
         </div>
@@ -105,6 +144,29 @@ export default function MovieDetailPage() {
         ) : (
           <p>No video available</p>
         )}
+      </div>
+      <div className="text-center mt-10 mb-10">
+        <h2 className="text-2xl font-bold">Elenco</h2>
+        <div className="flex overflow-x-auto scroll-style gap-5 mt-10">
+          {elenco.length > 0 ? (
+              elenco
+              .filter((ator) => ator.profile_path)
+              .map((ator) => (
+              <div key={ator.id} className="">
+                {ator.profile_path && (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
+                    alt={ator.name}
+                    className="max-w-24 rounded-xl min-w-34"
+                  />
+                )}
+                <p className="text-white">{ator.name}</p>
+              </div>
+            ))
+          ) : (
+            <p>No cast available</p>
+          )}
+        </div>
       </div>
     </>
   );
