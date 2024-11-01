@@ -1,6 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+
+
+
 export default function MovieDetailPage() {
   const { id } = useParams();
   const [movie, setMovie] = useState({});
@@ -101,7 +104,7 @@ export default function MovieDetailPage() {
                   </h2>
                 ))
               ) : (
-                <p>No genres available</p>
+                <p>Sem gêneros</p>
               )}
             </div>
 
@@ -116,7 +119,7 @@ export default function MovieDetailPage() {
                 className="border-2 border-gray-100 p-3 rounded bg-purple-800
               hover:bg-transparent hover:border-purple-800 duration-500"
               >
-                Favoritos
+                Sua lista
               </button>
               <button
                 onClick={() => handleAssistidos(filme)}
@@ -142,11 +145,11 @@ export default function MovieDetailPage() {
             allowFullScreen
           ></iframe>
         ) : (
-          <p>No video available</p>
+          <p>Sem trailer disponível</p>
         )}
       </div>
       <div className="text-center mt-10 mb-10">
-        <h2 className="text-2xl font-bold">Elenco</h2>
+        <h2 className="text-2xl">Elenco</h2>
         <div className="flex overflow-x-auto scroll-style gap-5 mt-10">
           {elenco.length > 0 ? (
               elenco
@@ -164,7 +167,7 @@ export default function MovieDetailPage() {
               </div>
             ))
           ) : (
-            <p>No cast available</p>
+            <p>Sem elenco dispoível</p>
           )}
         </div>
       </div>

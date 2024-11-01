@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import GenreCard from '../components/GenreCard'; 
 
 export default function GenreListPage() {
-  const [genres, setGenres] = useState([]); // Inicialize como um array
+  const [genres, setGenres] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -10,7 +10,7 @@ export default function GenreListPage() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setGenres(data.genres); // Acesse a propriedade 'genres'
+        setGenres(data.genres);
       })
       .catch((err) => console.error(err));
   }, []);
@@ -20,8 +20,8 @@ export default function GenreListPage() {
       <h1 className='font-bold text-2xl text-center mt-20'>Escolha o seu gênero preferido!</h1>
 
       <div className='flex flex-wrap justify-around items-center my-40 px-20 gap-12'>
-        {genres.map((genre) => ( // Altere 'genre' para 'genres' aqui
-          <GenreCard key={genre.id} name={genre.name} /> // Passe 'name' como prop
+        {genres.map((genre) => ( 
+          <GenreCard key={genre.id} name={genre.name} /> 
         ))}
       </div>
     </>
