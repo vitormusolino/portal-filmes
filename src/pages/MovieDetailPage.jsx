@@ -24,6 +24,7 @@ export default function MovieDetailPage() {
       favoritos = favoritos.filter((filme) => filme.id != id);
     } else {
       favoritos.push({ id, title, poster_path });
+      alert("Filme adicionado na sua lista!")
     }
 
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
@@ -38,6 +39,7 @@ export default function MovieDetailPage() {
       assistidos = assistidos.filter((filme) => filme.id != id);
     } else {
       assistidos.push({ id, title, poster_path });
+      alert("Filme assistido adicionado!")
     }
 
     localStorage.setItem("assistidos", JSON.stringify(assistidos));

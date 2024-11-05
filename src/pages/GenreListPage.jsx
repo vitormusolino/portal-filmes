@@ -10,7 +10,7 @@ export default function GenreListPage() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setGenres(data.genres);
+        setGenres(data.genres); 
       })
       .catch((err) => console.error(err));
   }, []);
@@ -21,7 +21,7 @@ export default function GenreListPage() {
 
       <div className='flex flex-wrap justify-around items-center my-40 px-20 gap-12'>
         {genres.map((genre) => ( 
-          <GenreCard key={genre.id} name={genre.name} /> 
+          <GenreCard key={genre.id} name={genre.name} id={genre.id} /> 
         ))}
       </div>
     </>
